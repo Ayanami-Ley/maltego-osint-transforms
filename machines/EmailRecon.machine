@@ -1,0 +1,18 @@
+machine("osint.EmailRecon",
+        displayName:"OSINT: Email Recon",
+        author:"demonking",
+        description:"Email -> параллельно holehe (где зареган) и HIBP (утечки).") {
+
+    start {
+        paths {
+            path {
+                log("holehe: сервисы по email")
+                run("osint.holehe.email")
+            }
+            path {
+                log("HIBP: утечки по email")
+                run("osint.hibp.email")
+            }
+        }
+    }
+}

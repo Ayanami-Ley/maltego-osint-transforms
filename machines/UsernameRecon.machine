@@ -1,0 +1,18 @@
+machine("osint.UsernameRecon",
+        displayName:"OSINT: Username Recon",
+        author:"demonking",
+        description:"Ник -> профили (maigret) -> извлечённые email -> holehe + HIBP. "
+                  + "Трансформы запускаются по цепочке: каждая срабатывает только на "
+                  + "сущностях подходящего типа из вывода предыдущей.") {
+
+    start {
+        log("1/3 maigret: ищем профили и вытаскиваем контакты")
+        run("osint.maigret.username")
+
+        log("2/3 holehe: где зарегистрированы найденные почты")
+        run("osint.holehe.email")
+
+        log("3/3 HIBP: утечки по найденным почтам")
+        run("osint.hibp.email")
+    }
+}
